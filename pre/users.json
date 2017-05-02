@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Alice",
+    "gender": "Female",
+    "email": "alice@example.com",
+    "age": 20,
+    "languages": [
+      {
+        "name": "Java",
+        "level": "expert"
+      },
+      {
+        "name": "C",
+        "level": "familiar"
+      },
+      {
+        "name": "Python",
+        "level": "beginner"
+      }
+    ]
+  },
+  {
+    "name": "Bob",
+    "gender": "Male",
+    "email": "bob@example.com",
+    "age": 21,
+    "languages": [
+      {
+        "name": "JavaScript",
+        "level": "expert"
+      },
+      {
+        "name": "Java",
+        "level": "beginner"
+      }
+    ]
+  }
+]

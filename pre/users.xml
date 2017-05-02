@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<users
+    xmlns="soa"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="soa users.xsd">
+  <user>
+    <name>Alice</name>
+    <gender>Female</gender>
+    <email>alice@example.com</email>
+    <age>20</age>
+    <languages>
+      <language>
+        <name>Java</name>
+        <level>expert</level>
+      </language>
+      <language>
+        <name>C</name>
+        <level>familiar</level>
+      </language>
+      <language>
+        <name>Python</name>
+        <level>beginner</level>
+      </language>
+    </languages>
+  </user>
+  <user>
+    <name>Bob</name>
+    <gender>Male</gender>
+    <email>bob@example.com</email>
+    <age>21</age>
+    <languages>
+      <language>
+        <name>JavaScript</name>
+        <level>expert</level>
+      </language>
+      <language>
+        <name>Java</name>
+        <level>beginner</level>
+      </language>
+    </languages>
+  </user>
+</users>

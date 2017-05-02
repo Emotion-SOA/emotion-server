@@ -14,7 +14,7 @@ paths:
     get:
       description: User login
       parameters:
-      - name: username
+      - name: email
         in: path
         type: string
         required: true
@@ -36,7 +36,7 @@ paths:
     post:
       description: User register
       parameters:
-      - name: username
+      - name: email
         in: body
         type: string
         required: true
@@ -58,7 +58,7 @@ paths:
     get:
       description: Get an image (base64 encoded)
       parameters:
-      - name: image_id
+      - name: imageID
         in: path
         type: integer
         required: true
@@ -89,34 +89,34 @@ paths:
             $ref: "#/definitions/ErrorResponse"
 
   /post:
-    get:
-      description: Get a post
-      parameters:
-      - name: post_id
-        in: body
-        type: integer
-        required: true
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GetPostResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+#    get:
+#      description: Get a post
+#      parameters:
+#      - name: post_id
+#        in: body
+#        type: integer
+#        required: true
+#      responses:
+#        "200":
+#          description: Success
+#          schema:
+#            $ref: "#/definitions/GetPostResponse"
+#        default:
+#          description: Error
+#          schema:
+#            $ref: "#/definitions/ErrorResponse"
     post:
       description: Add new post
       parameters:
-      - name: user_id
+      - name: token
         in: body
-        type: integer
+        type: string
         required: true
       - name: text
         in: body
         type: string
         required: true
-      - name: image_id
+      - name: imageID
         in: body
         type: integer
         required: true
@@ -137,26 +137,27 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
-  /location:
     get:
       description: Get nearby posts
       parameters:
       - name: latitude
-        in: body
+        in: path
         type: number
         required: true
       - name: longitude
-        in: body
+        in: path
         type: number
         required: true
+      - name: range
+        in: path
+        type: number
       responses:
         "200":
           description: Success
           schema:
             type: array
             items:
-              $ref: "#/definitions/LocationResponse"
+              $ref: "#/definitions/GetPostResponse"
         default:
           description: Error
           schema:
@@ -167,14 +168,17 @@ definitions:
   TokenResponse:
     required:
       - token
+      - token
     properties:
       token:
         type: string
+      token:
+        type: integer
   ErrorResponse:
     required:
-      - message
+      - error
     properties:
-      message:
+      error:
         type: string
   GetImageResponse:
     required:
@@ -184,22 +188,22 @@ definitions:
         type: string
   AddImageResponse:
     required:
-      - image_id
+      - imageID
     properties:
-      image_id:
+      imageID:
         type: integer
   GetPostResponse:
     required:
-      - user_id
+      - token
       - text
       - latitude
       - longitude
     properties:
-      user_id:
+      token:
         type: integer
       text:
         type: string
-      image_id:
+      imageID:
         type: integer
       latitude:
         type: number
@@ -209,11 +213,11 @@ definitions:
     required:
       - post_id
     properties:
-      image_id:
+      imageID:
         type: integer
   LocationResponse:
     required:
       - post_id
     properties:
-      image_id:
+      imageID:
         type: integer
