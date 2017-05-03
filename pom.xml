@@ -9,6 +9,12 @@
     <version>1.0.0</version>
 
     <dependencies>
+        <!--Google cloud api-->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-vision</artifactId>
+            <version>0.17.1-beta</version>
+        </dependency>
         <!--Waston-->
         <dependency>
             <groupId>com.ibm.watson.developer_cloud</groupId>
