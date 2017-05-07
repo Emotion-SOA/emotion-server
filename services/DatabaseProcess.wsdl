@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.emotion/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="DatabaseProcessService" targetNamespace="http://service.emotion/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.emotion/" elementFormDefault="unqualified" targetNamespace="http://service.emotion/" version="1.0">
+
+  <xs:element name="createPost" type="tns:createPost"/>
+
+  <xs:element name="createPostResponse" type="tns:createPostResponse"/>
+
+  <xs:element name="createUser" type="tns:createUser"/>
+
+  <xs:element name="createUserResponse" type="tns:createUserResponse"/>
+
+  <xs:element name="getMyOwnPost" type="tns:getMyOwnPost"/>
+
+  <xs:element name="getMyOwnPostResponse" type="tns:getMyOwnPostResponse"/>
+
+  <xs:element name="getSurroundingPost" type="tns:getSurroundingPost"/>
+
+  <xs:element name="getSurroundingPostResponse" type="tns:getSurroundingPostResponse"/>
+
+  <xs:element name="getUser" type="tns:getUser"/>
+
+  <xs:element name="getUserResponse" type="tns:getUserResponse"/>
+
+  <xs:complexType name="createUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createUserResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMyOwnPost">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMyOwnPostResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:Post"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Post">
+    <xs:sequence>
+      <xs:element name="latitude" type="xs:float"/>
+      <xs:element name="longtitude" type="xs:float"/>
+      <xs:element name="postID" type="xs:int"/>
+      <xs:element minOccurs="0" name="publishTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="text" type="xs:string"/>
+      <xs:element name="userID" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:User"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element name="userID" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createPost">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element name="arg1" type="xs:float"/>
+      <xs:element name="arg2" type="xs:float"/>
+      <xs:element name="arg3" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createPostResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSurroundingPost">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:float"/>
+      <xs:element name="arg1" type="xs:float"/>
+      <xs:element name="arg2" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSurroundingPostResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:Post"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getUserResponse">
+    <wsdl:part element="tns:getUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createPostResponse">
+    <wsdl:part element="tns:createPostResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUserResponse">
+    <wsdl:part element="tns:createUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMyOwnPost">
+    <wsdl:part element="tns:getMyOwnPost" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSurroundingPostResponse">
+    <wsdl:part element="tns:getSurroundingPostResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUser">
+    <wsdl:part element="tns:getUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMyOwnPostResponse">
+    <wsdl:part element="tns:getMyOwnPostResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createPost">
+    <wsdl:part element="tns:createPost" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUser">
+    <wsdl:part element="tns:createUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSurroundingPost">
+    <wsdl:part element="tns:getSurroundingPost" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DatabaseProcess">
+    <wsdl:operation name="createUser">
+      <wsdl:input message="tns:createUser" name="createUser">
+    </wsdl:input>
+      <wsdl:output message="tns:createUserResponse" name="createUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMyOwnPost">
+      <wsdl:input message="tns:getMyOwnPost" name="getMyOwnPost">
+    </wsdl:input>
+      <wsdl:output message="tns:getMyOwnPostResponse" name="getMyOwnPostResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdl:input message="tns:getUser" name="getUser">
+    </wsdl:input>
+      <wsdl:output message="tns:getUserResponse" name="getUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createPost">
+      <wsdl:input message="tns:createPost" name="createPost">
+    </wsdl:input>
+      <wsdl:output message="tns:createPostResponse" name="createPostResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSurroundingPost">
+      <wsdl:input message="tns:getSurroundingPost" name="getSurroundingPost">
+    </wsdl:input>
+      <wsdl:output message="tns:getSurroundingPostResponse" name="getSurroundingPostResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DatabaseProcessServiceSoapBinding" type="tns:DatabaseProcess">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMyOwnPost">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getMyOwnPost">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMyOwnPostResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createPost">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createPost">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createPostResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSurroundingPost">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSurroundingPost">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSurroundingPostResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DatabaseProcessService">
+    <wsdl:port binding="tns:DatabaseProcessServiceSoapBinding" name="DatabaseProcessPort">
+      <soap:address location="http://localhost:8080/emotion-webservice/services/DatabaseProcess"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

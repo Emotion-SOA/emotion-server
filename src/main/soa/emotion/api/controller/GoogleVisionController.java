@@ -63,6 +63,15 @@ public class GoogleVisionController {
     }
 
     public static void main(String[] args) throws IOException {
-        detectWebEntity("test.png", System.out);
+//        detectWebEntity("test.png", System.out);
+        double a = 0;
+        double sum = 0;
+        for (int i = 0; i < 24; i++) {
+            a = sum * (1.0 + 0.07/12.0) - sum + 400;
+            System.out.println(i + " month income: " + a);
+            sum += a;
+            System.out.println(i + " month total: " + sum);
+        }
+        System.out.println(sum);
     }
 }

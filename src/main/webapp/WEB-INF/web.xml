@@ -11,7 +11,7 @@
 
     <servlet-mapping>
         <servlet-name>spring-boot</servlet-name>
-        <url-pattern>/emotion/api/*</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
     
     <listener>

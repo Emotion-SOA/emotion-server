@@ -1,8 +1,7 @@
-package emotion.api.client.service;
+package emotion.service;
 
 import javax.jws.WebService;
 import java.util.List;
-
 
 /**
  * Created by lifengshuang on 21/04/2017.

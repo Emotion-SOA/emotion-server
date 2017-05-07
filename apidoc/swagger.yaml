@@ -58,7 +58,7 @@ paths:
     get:
       description: Get an image (base64 encoded)
       parameters:
-      - name: imageID
+      - name: imageName
         in: path
         type: integer
         required: true
@@ -116,7 +116,7 @@ paths:
         in: body
         type: string
         required: true
-      - name: imageID
+      - name: imageName
         in: body
         type: integer
         required: true
@@ -188,9 +188,9 @@ definitions:
         type: string
   AddImageResponse:
     required:
-      - imageID
+      - imageName
     properties:
-      imageID:
+      imageName:
         type: integer
   GetPostResponse:
     required:
@@ -203,7 +203,7 @@ definitions:
         type: integer
       text:
         type: string
-      imageID:
+      imageName:
         type: integer
       latitude:
         type: number
@@ -213,11 +213,11 @@ definitions:
     required:
       - post_id
     properties:
-      imageID:
+      imageName:
         type: integer
   LocationResponse:
     required:
       - post_id
     properties:
-      imageID:
+      imageName:
         type: integer

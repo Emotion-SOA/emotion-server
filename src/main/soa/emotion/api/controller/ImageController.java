@@ -2,9 +2,14 @@ package emotion.api.controller;
 
 import emotion.api.request.AddImageRequest;
 import emotion.api.response.ErrorResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Decoder;
 
 import java.io.*;
+import java.util.Base64;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by lifengshuang on 01/05/2017.
@@ -14,78 +19,53 @@ import java.io.*;
 @RequestMapping("/image")
 public class ImageController {
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    Object getImage(@RequestParam int imageID) {
-        File image = new File("image" + File.separator + imageID);
-        if (image.exists()) {
-            try {
-                FileInputStream fileInputStream = new FileInputStream(image);
-                // Not good to use available().
-                byte[] data = new byte[fileInputStream.available()];
-                int length = fileInputStream.read(data, 0, data.length);
-                return new GetImageResponse(new String(data, 0, length));
-            } catch (IOException e) {
-                e.printStackTrace();
-                return new ErrorResponse("Failed to read image");
-            }
-        } else {
-            return new ErrorResponse("Image not found");
-        }
-    }
+
+    @Autowired
+    private ServletContext servletContext;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public
     @ResponseBody
     Object addImage(@RequestBody AddImageRequest request) {
-        File imageDir = new File("image");
+        String absolutePath = servletContext.getRealPath("/");
+        File imageDir = new File(absolutePath + "image" + File.separator);
         if (!imageDir.exists()) {
             if (!imageDir.mkdir()) {
                 return new ErrorResponse("Image directory creation failed");
             }
         }
         int id = imageDir.listFiles().length;
-        File image = new File("image" + File.separator + id);
+        int slashIndex = request.getBase64().indexOf('/');
+        int semicolonIndex = request.getBase64().indexOf(';');
+        int commaIndex = request.getBase64().indexOf(',');
+        String type = request.getBase64().substring(slashIndex + 1, semicolonIndex);
+        String filename = id + "." + type;
+        File imageFile = new File(absolutePath + "image" + File.separator + filename);
+        String dataPart = request.getBase64().substring(commaIndex + 1);
         try {
-            FileWriter fileWriter = new FileWriter(image);
-            fileWriter.write(request.getBase64());
-            fileWriter.close();
-            return new AddImageResponse(id);
+            byte[] raw = Base64.getDecoder().decode(dataPart);
+            FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+            fileOutputStream.write(raw);
+            fileOutputStream.close();
+            return new AddImageResponse("/image/" + filename);
         } catch (IOException e) {
             return new ErrorResponse("Image creation failed");
         }
     }
 
-    private class GetImageResponse {
-        private String base64;
-
-        public GetImageResponse(String base64) {
-            this.base64 = base64;
-        }
-
-        public String getBase64() {
-            return base64;
-        }
-
-        public void setBase64(String base64) {
-            this.base64 = base64;
-        }
-    }
-
     private class AddImageResponse {
-        private int imageID;
+        private String imageName;
 
-        public AddImageResponse(int imageID) {
-            this.imageID = imageID;
+        public AddImageResponse(String imageName) {
+            this.imageName = imageName;
         }
 
-        public int getImageID() {
-            return imageID;
+        public String getImageName() {
+            return imageName;
         }
 
-        public void setImageID(int imageID) {
-            this.imageID = imageID;
+        public void setImageName(String imageName) {
+            this.imageName = imageName;
         }
     }
 

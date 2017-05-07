@@ -1,11 +1,14 @@
-package emotion.api.client.service;
+package emotion.service;
 
+import emotion.impl.PostAdapter;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
 /**
  * Created by mayezhou on 2017/4/23.
  */
-
+@XmlJavaTypeAdapter(PostAdapter.class)
 public interface Post {
     int getPostID() ;
 
