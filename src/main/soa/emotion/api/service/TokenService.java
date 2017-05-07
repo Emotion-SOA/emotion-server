@@ -52,6 +52,7 @@ public class TokenService {
         public UserInfo(String username, long latestVisitTime, int userID) {
             this.username = username;
             this.latestVisitTime = latestVisitTime;
+            this.userID = userID;
         }
 
         public String getUsername() {

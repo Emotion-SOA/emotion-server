@@ -28,7 +28,6 @@ public class UserController {
             }
         } catch (Exception e) {
             return new ErrorResponse("DB service failed.\n" + Arrays.toString(e.getStackTrace()));
-
         }
     }
 

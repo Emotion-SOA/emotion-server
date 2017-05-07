@@ -43,10 +43,10 @@ public class DatabaseWebserviceClient {
             System.out.println("user password: " + user.getPassword());
         }
         List<Post> posts = hw.getSurroundingPost(0, 0, 1);
-        for (Post post :
-                posts) {
+        for (Post post : posts) {
             System.out.println(post.getPublishTime()+"\n"+post.getText());
         }
+
     }
 }
 

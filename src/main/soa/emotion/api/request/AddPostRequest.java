@@ -6,7 +6,7 @@ package emotion.api.request;
 public class AddPostRequest {
     private String token;
     private String text;
-    private int imageID;
+    private String imagePath;
     private float latitude;
     private float longitude;
 
@@ -26,12 +26,12 @@ public class AddPostRequest {
         this.text = text;
     }
 
-    public int getImageID() {
-        return imageID;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageID(int imageID) {
-        this.imageID = imageID;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public float getLatitude() {
