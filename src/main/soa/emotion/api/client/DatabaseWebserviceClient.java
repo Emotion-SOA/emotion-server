@@ -46,7 +46,6 @@ public class DatabaseWebserviceClient {
         for (Post post : posts) {
             System.out.println(post.getPublishTime()+"\n"+post.getText());
         }
-
     }
 }
 

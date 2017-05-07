@@ -1,6 +1,7 @@
 package emotion.api.controller;
 
 import emotion.api.client.DatabaseWebserviceClient;
+import emotion.api.request.UserLoginRequest;
 import emotion.service.User;
 import emotion.api.request.UserRegisterRequest;
 import emotion.api.response.ErrorResponse;
@@ -17,12 +18,15 @@ import java.util.Arrays;
 @RequestMapping("/user")
 public class UserController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public @ResponseBody Object login(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public @ResponseBody Object login(@RequestBody UserLoginRequest request) {
         try {
-            User user = DatabaseWebserviceClient.getDB().getUser(email);
-            if (user.getPassword().equals(password)) {
-                return new UserResponse(email, user.getUserID());
+            User user = DatabaseWebserviceClient.getDB().getUser(request.getEmail());
+            if (user == null) {
+                return new ErrorResponse("User not found.");
+            }
+            if (user.getPassword().equals(request.getPassword())) {
+                return new UserResponse(request.getEmail(), user.getUserID());
             } else {
                 return new ErrorResponse("Password is incorrect");
             }

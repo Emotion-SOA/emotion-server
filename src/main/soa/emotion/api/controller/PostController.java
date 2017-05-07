@@ -39,7 +39,7 @@ public class PostController {
     }
 
     //todo: add image
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public
     @ResponseBody
     Object addPost(@RequestBody AddPostRequest request) {
