@@ -1,3 +1,4 @@
+src/main/soa/emotion/api/controller/WordCloudController.java
 target/
 .idea/
 pre/

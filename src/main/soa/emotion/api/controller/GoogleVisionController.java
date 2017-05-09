@@ -49,7 +49,6 @@ public class GoogleVisionController {
                 .setImage(img)
                 .build();
         requests.add(request);
-
         ImageAnnotatorClient vision = ImageAnnotatorClient.create();
 
         // Performs label detection on the image file
@@ -73,7 +72,7 @@ public class GoogleVisionController {
         return googleVisionResponse;
     }
 
-    private class GoogleVisionResponse {
+    private static class GoogleVisionResponse {
         private List<Entity> entities = new LinkedList<>();
         private List<String> urls = new LinkedList<>();
 
@@ -102,7 +101,7 @@ public class GoogleVisionController {
         }
     }
 
-    private class Entity {
+    private static class Entity {
         private String description;
         private String id;
         private float score;
@@ -140,16 +139,47 @@ public class GoogleVisionController {
 
 
     //filepath: relative
-    public static void detectWebEntity(String filepath, PrintStream out) throws IOException {
+    public static Object detectWebEntity(String filepath, PrintStream out) throws IOException {
 
         //TODO: do in your own way, as long as the parameter to the request is ByteString
         Path path = Paths.get(filepath);
         byte[] data = Files.readAllBytes(path);
         ByteString imgBytes = ByteString.copyFrom(data);
 
+        // Builds the image annotation request
+        List<AnnotateImageRequest> requests = new ArrayList<>();
+        Image img = Image.newBuilder().setContent(imgBytes).build();
+        Feature feat = Feature.newBuilder().setType(Type.WEB_DETECTION).build();//only use Web Entity Detection
+        AnnotateImageRequest request = AnnotateImageRequest.newBuilder()
+                .addFeatures(feat)
+                .setImage(img)
+                .build();
+        requests.add(request);
+        ImageAnnotatorClient vision = ImageAnnotatorClient.create();
+
+        // Performs label detection on the image file
+        BatchAnnotateImagesResponse response = vision.batchAnnotateImages(requests);
+        List<AnnotateImageResponse> responses = response.getResponsesList();
+
+        GoogleVisionResponse googleVisionResponse = new GoogleVisionResponse();
+        for (AnnotateImageResponse res : responses) {
+            if (res.hasError()) {
+                return new ErrorResponse("Error: " + res.getError().getMessage());
+            }
+            WebDetection annotation = res.getWebDetection();
+            //TODO: only those score high than 0.5, one or two is enough, only need the discription & link
+            for (WebEntity entity : annotation.getWebEntitiesList()) {
+                googleVisionResponse.addEntity(new Entity(entity.getDescription(), entity.getEntityId(), entity.getScore()));
+            }
+            for (WebPage page : annotation.getPagesWithMatchingImagesList()) {
+                googleVisionResponse.addUrl(page.getUrl());
+            }
+        }
+        return googleVisionResponse;
     }
 
     public static void main(String[] args) throws IOException {
         detectWebEntity("test.png", System.out);
+
     }
 }
